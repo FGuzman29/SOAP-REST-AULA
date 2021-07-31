@@ -24,6 +24,7 @@ public class Main {
                 case 1 :
                     System.out.println("Ingrese la matricula: ");
                     matricula = sc.nextInt();
+                    sc.nextLine();
                     System.out.println("Ingrese la carrera: ");
                     carrera = sc.nextLine();
                     System.out.println("Ingrese el nombre: ");
@@ -78,12 +79,8 @@ public class Main {
     }
     public static void eliminarEstudiante(int mat)
     {
-        HttpResponse<Estudiante> estudianteDELETE = Unirest.delete("http://localhost:7000/api/estudiante/:"+mat)
-                .header("accept", "application/json")
-                .queryString("apiKey", "123")
-                .asObject(Estudiante.class);
+        HttpResponse estudianteDELETE = Unirest.delete("http://localhost:7000/api/estudiante/"+mat).asEmpty();
         System.out.println("El codigo de respuesta es: "+estudianteDELETE.getStatus());
-        System.out.println("El mensaje es: "+estudianteDELETE.getBody().toString());
     }
 
     public static void buscarListaEstudiante()
